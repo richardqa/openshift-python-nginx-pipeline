@@ -1,10 +1,6 @@
 pipeline {
     agent {
         node {label 'python'}
-        docker {
-          image 'reposdocker.minsa.gob.pe/prodocp-eqhali:v1.0.0'
-          label 'jenkins-citas'
-          registryUrl 'https://reposdocker.minsa.gob.pe' 
     }
     environment {
         APPLICATION_NAME = 'desa-citas'
@@ -78,7 +74,7 @@ pipeline {
             script {
                 openshift.withCluster() {
                     openshift.withProject(DEV_PROJECT) {
-                        openshift.newBuild("--name=${TEMPLATE_NAME}", "--docker-image=reposdocker.minsa.gob.pe/prodocp-eqhali:v1.0.0", "--binary=true")
+                        openshift.newBuild("--name=${TEMPLATE_NAME}", "--docker-image=richardqa/ocp:1.0.1", "--binary=true")
                         }
                     }
                 }
